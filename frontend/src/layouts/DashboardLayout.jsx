@@ -21,8 +21,10 @@ const DashboardLayout = ({ children }) => {
     <div className="min-h-screen bg-darkBg flex relative">
       {/* Sidebar Navigation */}
       <Sidebar
-        isOpen={!sidebarCollapsed || sidebarOpen}
+        isMobileOpen={sidebarOpen}
+        isCollapsed={sidebarCollapsed}
         toggleCollapse={toggleCollapse}
+        onClose={() => setSidebarOpen(false)}
       />
 
       {/* Mobile Drawer Background Backdrop Overlay */}
