@@ -1,0 +1,113 @@
+@import "tailwindcss";
+
+@theme {
+  --color-darkBg: #080810;
+  --color-darkCard: rgba(15, 15, 25, 0.7);
+  --color-darkBorder: rgba(255, 255, 255, 0.08);
+  --color-brandPrimary: #6366f1;
+  --color-brandSecondary: #a855f7;
+  --color-brandAccent: #10b981;
+  --color-brandAlert: #ef4444;
+  --color-textPrimary: #f9fafb;
+  --color-textSecondary: #9ca3af;
+  
+  --shadow-glass: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+  --shadow-glowPrimary: 0 0 20px rgba(99, 102, 241, 0.15);
+  --shadow-glowSecondary: 0 0 20px rgba(168, 85, 247, 0.15);
+}
+
+@layer base {
+  body {
+    @apply bg-darkBg text-textPrimary font-sans antialiased overflow-x-hidden;
+    background-image: 
+      radial-gradient(at 10% 10%, rgba(99, 102, 241, 0.08) 0px, transparent 50%),
+      radial-gradient(at 90% 10%, rgba(168, 85, 247, 0.08) 0px, transparent 50%),
+      radial-gradient(at 50% 90%, rgba(16, 185, 129, 0.05) 0px, transparent 50%);
+    background-attachment: fixed;
+  }
+
+  /* Custom scrollbar layout */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: rgba(15, 15, 25, 0.5);
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(99, 102, 241, 0.4);
+  }
+}
+
+@layer utilities {
+  .glass-panel {
+    @apply bg-darkCard border border-darkBorder backdrop-blur-md shadow-glass rounded-2xl;
+  }
+  
+  .glass-panel-hover {
+    @apply transition-all duration-300 hover:border-brandPrimary/30 hover:shadow-glowPrimary hover:bg-darkCard/80;
+  }
+  
+  .glow-text-primary {
+    text-shadow: 0 0 10px rgba(99, 102, 241, 0.5);
+  }
+
+  .glow-text-secondary {
+    text-shadow: 0 0 10px rgba(168, 85, 247, 0.5);
+  }
+  
+  .shimmer {
+    background: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.03) 50%,
+      rgba(255, 255, 255, 0) 100%
+    );
+    background-size: 200% 100%;
+    animation: loading-shimmer 1.5s infinite;
+  }
+}
+
+@keyframes loading-shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+.typing-indicator span {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  background-color: #9ca3af;
+  border-radius: 50%;
+  margin-right: 4px;
+  animation: typing-bounce 1s infinite;
+}
+
+.typing-indicator span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.typing-indicator span:nth-child(3) {
+  animation-delay: 0.4s;
+  margin-right: 0;
+}
+
+@keyframes typing-bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
