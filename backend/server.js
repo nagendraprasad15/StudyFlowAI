@@ -76,6 +76,10 @@ const limiter = rateLimit({
 app.use('/api', limiter);
 
 // Base route test API
+app.get('/', (req, res) => {
+  res.send('Welcome to the StudyFlow AI API server. Please use /api/health to check health status.');
+});
+
 app.get('/api/health', (req, res) => {
   res.json({
     success: true,
