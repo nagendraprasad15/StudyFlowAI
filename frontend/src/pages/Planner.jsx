@@ -98,7 +98,17 @@ const Planner = () => {
 
   const handleGenerateAIPlan = async (e) => {
     e.preventDefault();
-    if (subjects.length === 0) {
+    
+    let activeSubjects = [...subjects];
+    if (newSubject.trim()) {
+      if (!activeSubjects.includes(newSubject.trim())) {
+        activeSubjects.push(newSubject.trim());
+        setSubjects(activeSubjects);
+      }
+      setNewSubject('');
+    }
+
+    if (activeSubjects.length === 0) {
       return toast.error('Please add at least one subject');
     }
     if (!examDate) {
@@ -109,7 +119,7 @@ const Planner = () => {
     const toastId = toast.loading('AI is calculating study cycles & curriculum schedule...');
     
     try {
-      const result = await generateStudyPlan(subjects, examDate, dailyHours);
+      const result = await generateStudyPlan(activeSubjects, examDate, dailyHours);
       if (result && result.studyPlan) {
         setActivePlan(result.studyPlan);
         toast.success('AI Study Plan generated and saved successfully!', { id: toastId });
